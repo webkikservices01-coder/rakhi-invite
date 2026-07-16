@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsx *)",
+      "Bash(powershell -Command \"Stop-Process -Id 7180 -Force\")"
+    ]
+  }
+}

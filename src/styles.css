@@ -1,0 +1,214 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* =========================================================
+   RAKHI TEMPLATES — Indian luxury design system
+   Silver = restrained cream/gold
+   Gold   = rich maroon/marigold/emerald
+   Platinum = deep purple/rose gold/ivory with glow
+   ========================================================= */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Indian palette tokens */
+  --color-marigold: var(--marigold);
+  --color-maroon: var(--maroon);
+  --color-henna: var(--henna);
+  --color-peacock: var(--peacock);
+  --color-rose-gold: var(--rose-gold);
+  --color-ivory: var(--ivory);
+  --color-royal: var(--royal);
+
+  /* tier accents */
+  --color-silver-accent: var(--silver-accent);
+  --color-gold-accent: var(--gold-accent);
+  --color-platinum-accent: var(--platinum-accent);
+
+  --font-display: "Cormorant Garamond", "Playfair Display", serif;
+  --font-devanagari: "Tiro Devanagari Hindi", "Rozha One", serif;
+  --font-hand: "Dancing Script", cursive;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --background: oklch(0.98 0.01 80);
+  --foreground: oklch(0.2 0.03 30);
+  --card: oklch(0.99 0.008 80);
+  --card-foreground: oklch(0.2 0.03 30);
+  --popover: oklch(0.99 0.008 80);
+  --popover-foreground: oklch(0.2 0.03 30);
+  --primary: oklch(0.4 0.16 25);          /* deep maroon */
+  --primary-foreground: oklch(0.98 0.02 85);
+  --secondary: oklch(0.94 0.03 85);
+  --secondary-foreground: oklch(0.25 0.06 30);
+  --muted: oklch(0.95 0.02 80);
+  --muted-foreground: oklch(0.45 0.04 30);
+  --accent: oklch(0.78 0.15 75);          /* marigold */
+  --accent-foreground: oklch(0.2 0.05 30);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: oklch(0.98 0.02 85);
+  --border: oklch(0.88 0.03 75);
+  --input: oklch(0.9 0.03 75);
+  --ring: oklch(0.55 0.15 30);
+
+  /* Indian tokens */
+  --marigold: oklch(0.78 0.17 75);
+  --maroon: oklch(0.36 0.16 22);
+  --henna: oklch(0.42 0.13 155);
+  --peacock: oklch(0.48 0.14 220);
+  --rose-gold: oklch(0.72 0.09 40);
+  --ivory: oklch(0.97 0.02 85);
+  --royal: oklch(0.32 0.13 290);
+
+  --silver-accent: oklch(0.75 0.02 250);
+  --gold-accent: oklch(0.78 0.17 82);
+  --platinum-accent: oklch(0.65 0.18 320);
+
+  /* Signature gradients */
+  --gradient-marigold: linear-gradient(135deg, oklch(0.82 0.18 75), oklch(0.7 0.19 45));
+  --gradient-maroon-gold: linear-gradient(135deg, oklch(0.36 0.16 22), oklch(0.78 0.17 75));
+  --gradient-royal: linear-gradient(135deg, oklch(0.32 0.13 290), oklch(0.5 0.19 320));
+  --gradient-platinum: linear-gradient(135deg, oklch(0.35 0.12 290), oklch(0.6 0.18 340), oklch(0.78 0.15 75));
+  --gradient-ivory: linear-gradient(135deg, oklch(0.98 0.02 85), oklch(0.92 0.04 60));
+  --gradient-diya: radial-gradient(circle at 50% 30%, oklch(0.9 0.2 75) 0%, oklch(0.5 0.2 40) 60%, transparent 100%);
+
+  /* Shadows */
+  --shadow-soft: 0 8px 30px -12px oklch(0.4 0.16 25 / 0.25);
+  --shadow-glow: 0 0 40px oklch(0.78 0.17 75 / 0.45);
+  --shadow-platinum: 0 20px 60px -20px oklch(0.5 0.2 320 / 0.45), 0 0 80px oklch(0.78 0.17 75 / 0.2);
+}
+
+.dark {
+  --background: oklch(0.15 0.03 30);
+  --foreground: oklch(0.96 0.02 80);
+  --card: oklch(0.2 0.04 30);
+  --card-foreground: oklch(0.96 0.02 80);
+  --popover: oklch(0.2 0.04 30);
+  --popover-foreground: oklch(0.96 0.02 80);
+  --primary: oklch(0.78 0.17 75);
+  --primary-foreground: oklch(0.15 0.03 30);
+  --secondary: oklch(0.25 0.05 30);
+  --secondary-foreground: oklch(0.96 0.02 80);
+  --muted: oklch(0.25 0.04 30);
+  --muted-foreground: oklch(0.7 0.05 60);
+  --accent: oklch(0.78 0.17 75);
+  --accent-foreground: oklch(0.15 0.03 30);
+  --border: oklch(0.3 0.05 30);
+  --input: oklch(0.3 0.05 30);
+  --ring: oklch(0.78 0.17 75);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Utility helpers */
+@utility font-display { font-family: var(--font-display); }
+@utility font-hand { font-family: var(--font-hand); }
+@utility font-deva { font-family: var(--font-devanagari); }
+
+@utility bg-marigold-grad { background: var(--gradient-marigold); }
+@utility bg-maroon-gold { background: var(--gradient-maroon-gold); }
+@utility bg-royal-grad { background: var(--gradient-royal); }
+@utility bg-platinum-grad { background: var(--gradient-platinum); }
+@utility bg-ivory-grad { background: var(--gradient-ivory); }
+
+@utility shadow-soft { box-shadow: var(--shadow-soft); }
+@utility shadow-glow { box-shadow: var(--shadow-glow); }
+@utility shadow-platinum { box-shadow: var(--shadow-platinum); }
+
+@utility text-gold-shine {
+  background: linear-gradient(135deg, oklch(0.9 0.15 85), oklch(0.65 0.18 45), oklch(0.9 0.15 85));
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 4s ease-in-out infinite;
+}
+
+/* Decorative border */
+@utility ornate-border {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(135deg, oklch(0.78 0.17 75), oklch(0.36 0.16 22), oklch(0.78 0.17 75)) border-box;
+}
+
+/* Keyframes */
+@keyframes shine {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes float-up {
+  0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+}
+@keyframes fall-down {
+  0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+@keyframes diya-flicker {
+  0%, 100% { opacity: 0.85; transform: scale(1); filter: drop-shadow(0 0 12px oklch(0.85 0.2 60)); }
+  50% { opacity: 1; transform: scale(1.05); filter: drop-shadow(0 0 20px oklch(0.85 0.2 60)); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px oklch(0.78 0.17 75 / 0.3); }
+  50% { box-shadow: 0 0 40px oklch(0.78 0.17 75 / 0.6); }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@utility animate-diya { animation: diya-flicker 2.5s ease-in-out infinite; }
+@utility animate-glow-pulse { animation: pulse-glow 3s ease-in-out infinite; }
+@utility animate-fade-up { animation: fade-in-up 0.8s ease-out both; }
