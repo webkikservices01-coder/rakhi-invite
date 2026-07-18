@@ -1,38 +1,34 @@
-# Hostinger deployment guide
+# Deploy guide
 
-This app is an SSR/Node-based TanStack Start project (with an AI chat server function). It will not work on basic shared Apache hosting without a Node.js runtime.
+> **Note:** Gold/Platinum templates now require a Cashfree payment to Deploy, which needs the
+> `/api/*` serverless functions in this repo — those don't run on Hostinger's static hosting. See
+> `VERCEL_DEPLOY.md` if you want payments working. This guide still applies for a Silver-only /
+> no-payments static deploy (the Deploy button will fail on Gold/Platinum since `/api` won't exist).
 
-## Recommended setup — Hostinger Node.js hosting or VPS
-This gets you the full site **and** the working AI chat ("Marvels").
+This is a plain **React SPA** (Vite + react-router-dom) — no server, no API keys, no Node runtime needed at runtime for the Silver tier. The AI chatbot ("Marvels") runs entirely in the browser (rule-based, in `src/lib/ai-chat.functions.ts`), so it works on any static host.
 
-### 1) Install dependencies
+## 1) Install dependencies
 ```bash
 npm install
 ```
 
-### 2) Build for production
+## 2) Build for production
 ```bash
 npm run build
 ```
-`vite.config.ts` pins the Nitro build to the `node-server` preset, so this produces a plain Node server bundle at `.output/server/index.mjs` (not a Cloudflare Worker bundle).
+This produces a fully static site in `dist/` — `index.html`, `assets/`, and a copy of everything in `public/` (including `.htaccess` and `_redirects`).
 
-### 3) Set environment variables
-In Hostinger's Node app environment settings:
-- `PORT=3000`
-- `ANTHROPIC_API_KEY=your_api_key`
+## 3) Deploy `dist/` anywhere static
 
-The AI chat ("Marvels") feature calls Anthropic directly — without the key it replies with a friendly "not available" message instead of failing.
+**Hostinger (shared hosting)**
+Upload the contents of `dist/` to `public_html/` (via File Manager or FTP). The included `.htaccess` handles SPA routing (`/silver`, `/t/:tier/:id`, etc. all resolve to `index.html`) and asset caching.
 
-### 4) Start the app
-```bash
-npm start
-```
-This runs `node .output/server/index.mjs`.
+**Netlify / Vercel / Cloudflare Pages**
+Point the build command to `npm run build` and the publish/output directory to `dist`. The included `public/_redirects` (`/* /index.html 200`) already handles SPA routing for Netlify; Vercel and Cloudflare Pages auto-detect the Vite SPA pattern.
 
-## If your Hostinger plan only supports static hosting
-```bash
-npm run build:hostinger
-```
-This creates a static-only package at `dist/` (with an `.htaccess` for SPA-style routing) that you can upload directly. Note the trade-off:
-- The template pages, colors, and layouts work fine.
-- The AI chat will **not** work — it's a server function that needs the Node runtime from the option above, not a static file server.
+**Any other static host (S3, GitHub Pages, nginx, etc.)**
+Upload `dist/` as-is. Just make sure unknown paths fall back to `index.html` (client-side routing) — e.g. an nginx `try_files $uri /index.html;` rule.
+
+## Notes
+- For Silver, "Deploying" an invite (the Deploy button) just saves the card to the visitor's own browser `localStorage` and copies a shareable link — it does not call any backend. No environment variables are required for Silver-only.
+- For Gold/Platinum, Deploy first requires a Cashfree payment (see `VERCEL_DEPLOY.md`) — this needs a deploy target that runs `/api/*`, which Hostinger's static hosting does not.

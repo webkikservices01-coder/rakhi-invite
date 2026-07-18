@@ -43,7 +43,7 @@ export function MusicPlayer({
     if (!audioRef.current) return;
     if (playing && src) {
       audioRef.current.play().catch(() => {
-        toast.error("Browser ne play block kar diya. Ek baar click karke try karo.");
+        toast.error("Your browser blocked autoplay. Tap play once to start it.");
         setPlaying(false);
       });
     } else {
@@ -93,7 +93,7 @@ export function MusicPlayer({
             onClick={() => fileRef.current?.click()}
             className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg border border-white/20 py-2 text-xs uppercase tracking-widest hover:bg-white/10"
           >
-            <Upload size={14} /> Apna gaana upload karo
+            <Upload size={14} /> Upload your own song
           </button>
           <input ref={fileRef} type="file" accept="audio/*" className="hidden" onChange={handleFile} />
         </div>

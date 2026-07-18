@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
-import { Link } from "@tanstack/react-router";
-import { useServerFn } from "@tanstack/react-start";
-import { Sparkles, ArrowLeft, Palette, Type, Rocket } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Sparkles, ArrowLeft, Palette, Type, Rocket, Lock } from "lucide-react";
 import { toast } from "sonner";
 import type { Template } from "@/data/templates";
 import { IMAGES } from "@/data/images";
@@ -11,7 +10,9 @@ import { MusicPlayer } from "./MusicPlayer";
 import { AIChat, type AIAction } from "./AIChat";
 import { EditableText } from "./EditableText";
 import { PhotoUpload } from "./PhotoUpload";
-import { createInvite } from "@/lib/invites.server";
+import { encodeInviteState } from "@/lib/invite-link";
+import { isTierUnlocked } from "@/lib/payment";
+import { PaywallModal } from "@/features/payment/PaywallModal";
 
 export function TemplateEngine({
   template,
@@ -20,7 +21,7 @@ export function TemplateEngine({
 }: {
   template: Template;
   locked?: boolean;
-  initialState?: TemplateState;
+  initialState?: Partial<TemplateState>;
 }) {
   const { state, setState, palette } = useTemplateState(template, initialState);
   const isGold = template.tier === "gold";
@@ -29,18 +30,34 @@ export function TemplateEngine({
   const hasAI = !locked;
   const maxPhotos = isPlatinum ? Infinity : isGold ? 2 : 0;
   const [publishing, setPublishing] = useState(false);
-  const createInviteFn = useServerFn(createInvite);
+  const [unlocked, setUnlocked] = useState(() => isTierUnlocked(template.tier));
+  const [showPaywall, setShowPaywall] = useState(false);
+  const needsUnlock = (isGold || isPlatinum) && !unlocked;
 
   const publish = async () => {
     if (publishing) return;
+    // Re-check localStorage live (not the `unlocked` state var) so this works
+    // correctly when called right after PaywallModal's onUnlocked, before a
+    // re-render would otherwise refresh the closure over `unlocked`.
+    if ((isGold || isPlatinum) && !isTierUnlocked(template.tier)) {
+      setShowPaywall(true);
+      return;
+    }
     setPublishing(true);
     try {
-      const { id } = await createInviteFn({
-        data: { tier: template.tier, templateId: template.id, state },
+      const encoded = encodeInviteState({
+        brotherName: state.brotherName,
+        sisterName: state.sisterName,
+        from: state.from,
+        message: state.message,
+        wish: state.wish,
+        fontOverride: state.fontOverride,
+        aiLang: state.aiLang,
+        paletteOverride: state.paletteOverride,
       });
-      const url = `${window.location.origin}/t/${template.tier}/${id}`;
+      const url = `${window.location.origin}/t/${template.tier}/${template.id}?d=${encoded}`;
       await navigator.clipboard.writeText(url).catch(() => {});
-      toast.success(`Invite deployed! Link copied: ${url}`);
+      toast.success(`Invite ready! Share this link: ${url}`);
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Unknown error";
       toast.error(`Deploy failed: ${msg}`);
@@ -82,7 +99,7 @@ export function TemplateEngine({
 
       {/* Back nav */}
       <div className="relative z-30 flex items-center justify-between px-6 py-4 sm:px-10">
-        <Link to="/$tier" params={{ tier: template.tier }} className="inline-flex items-center gap-1.5 rounded-full bg-black/20 px-3 py-1.5 text-xs backdrop-blur hover:bg-black/30" style={{ color: palette.text }}>
+        <Link to={`/${template.tier}`} className="inline-flex items-center gap-1.5 rounded-full bg-black/20 px-3 py-1.5 text-xs backdrop-blur hover:bg-black/30" style={{ color: palette.text }}>
           <ArrowLeft size={14} /> Back
         </Link>
         <div className="flex items-center gap-2">
@@ -92,13 +109,14 @@ export function TemplateEngine({
               <PaletteMenu onPick={(bg) => handleAction({ type: "setColor", target: "bg", value: bg })} />
               <FontMenu onPick={(f) => handleAction({ type: "setFont", value: f })} />
               <button
-                onClick={publish}
+                onClick={() => void publish()}
                 disabled={publishing}
-                title="Deploy your invite — get a shareable link"
+                title={needsUnlock ? `Unlock ${template.tier} to deploy your invite` : "Deploy your invite — get a shareable link"}
                 className="flex items-center gap-1.5 rounded-full bg-black/20 px-3 py-1.5 text-xs backdrop-blur hover:bg-black/30 disabled:opacity-50"
                 style={{ color: palette.text }}
               >
-                <Rocket size={14} /> {publishing ? "Deploying…" : "Deploy"}
+                {needsUnlock ? <Lock size={14} /> : <Rocket size={14} />}
+                {publishing ? "Deploying…" : needsUnlock ? "Unlock & Deploy" : "Deploy"}
               </button>
             </>
           )}
@@ -123,9 +141,22 @@ export function TemplateEngine({
 
       {hasAI && <AIChat template={template} state={state} onAction={handleAction} hasMusic={hasMusic} hasPhotos={maxPhotos > 0} />}
 
+      {showPaywall && (isGold || isPlatinum) && (
+        <PaywallModal
+          tier={template.tier as "gold" | "platinum"}
+          templateId={template.id}
+          onClose={() => setShowPaywall(false)}
+          onUnlocked={() => {
+            setUnlocked(true);
+            setShowPaywall(false);
+            void publish();
+          }}
+        />
+      )}
+
       <footer className="relative z-20 border-t border-white/10 py-8 text-center text-xs opacity-70">
         <div className="font-hand text-lg">— Rakhi Vibes —</div>
-        <div className="mt-1">Made with ❤️ for every bhai-behen ❤️</div>
+        <div className="mt-1">Made with ❤️ for every brother and sister ❤️</div>
       </footer>
     </div>
   );
@@ -383,7 +414,7 @@ function renderLayout(t: Template, state: ReturnType<typeof useTemplateState>["s
             <div className="mx-auto max-w-4xl px-6 py-16 text-center">
               <div className="text-xs uppercase tracking-[0.4em] opacity-70">Your Album</div>
               <h2 className={`${fontClass} mt-2 text-4xl`}>Family Frames</h2>
-              <p className="mt-2 opacity-70 text-sm">Upload jitni chaho — unlimited photos</p>
+              <p className="mt-2 opacity-70 text-sm">Upload as many as you like — unlimited photos</p>
               <div className="mt-6 flex justify-center"><PhotoUpload photos={state.photos} onChange={photos => setNames({ photos })} max={maxPhotos} size="lg" readOnly={readOnly} /></div>
             </div>
           )}

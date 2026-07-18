@@ -42,10 +42,10 @@ function initial(t: Template): TemplateState {
   };
 }
 
-export function useTemplateState(t: Template, initialState?: TemplateState) {
+export function useTemplateState(t: Template, initialState?: Partial<TemplateState>) {
   const key = KEY(t.tier, t.id);
   const locked = Boolean(initialState);
-  const [state, setState] = useState<TemplateState>(() => initialState ?? initial(t));
+  const [state, setState] = useState<TemplateState>(() => ({ ...initial(t), ...initialState }));
 
   // hydrate from localStorage on mount (skip entirely for a locked/deployed invite)
   useEffect(() => {

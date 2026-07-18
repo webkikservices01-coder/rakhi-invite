@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Mic, MicOff, Send, Sparkles, X, Bot } from "lucide-react";
 import { toast } from "sonner";
-import { useServerFn } from "@tanstack/react-start";
 import { rakhiChat } from "@/lib/ai-chat.functions";
 import type { TemplateState } from "./useTemplateState";
 import type { Template } from "@/data/templates";
@@ -70,8 +69,6 @@ export function AIChat({
   const recRef = useRef<SR | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const chat = useServerFn(rakhiChat);
-
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: 99999, behavior: "smooth" });
   }, [messages]);
@@ -82,28 +79,26 @@ export function AIChat({
     setMessages((m) => [...m, { role: "user", text }]);
     setInput("");
     try {
-      const res = await chat({
-        data: {
-          message: text,
-          lang: state.aiLang,
-          history: messages.map((m) => ({ role: m.role, text: m.text })),
-          currentFields: {
-            brotherName: state.brotherName,
-            sisterName: state.sisterName,
-            message: state.message,
-            wish: state.wish,
-            fontOverride: state.fontOverride,
-            paletteOverride: state.paletteOverride,
-          },
-          context: {
-            templateName: template.name,
-            tier: template.tier,
-            hasMusic,
-            hasPhotos,
-            brotherName: state.brotherName,
-            sisterName: state.sisterName,
-            from: state.from,
-          },
+      const res = await rakhiChat({
+        message: text,
+        lang: state.aiLang,
+        history: messages.map((m) => ({ role: m.role, text: m.text })),
+        currentFields: {
+          brotherName: state.brotherName,
+          sisterName: state.sisterName,
+          message: state.message,
+          wish: state.wish,
+          fontOverride: state.fontOverride,
+          paletteOverride: state.paletteOverride,
+        },
+        context: {
+          templateName: template.name,
+          tier: template.tier,
+          hasMusic,
+          hasPhotos,
+          brotherName: state.brotherName,
+          sisterName: state.sisterName,
+          from: state.from,
         },
       });
       setMessages((m) => [...m, { role: "assistant", text: res.reply }]);

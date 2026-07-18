@@ -3,3 +3,7 @@ node_modules
 .env
 .env.local
 .output/
+.vercel
+.env*
+dist/
+*.zip

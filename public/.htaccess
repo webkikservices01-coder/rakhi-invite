@@ -1,15 +1,5 @@
-import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+Options -Indexes
 
-const rootDir = process.cwd();
-const outputDir = join(rootDir, '.output', 'public');
-const distDir = join(rootDir, 'dist');
-
-rmSync(distDir, { recursive: true, force: true });
-mkdirSync(distDir, { recursive: true });
-cpSync(outputDir, distDir, { recursive: true });
-
-const htaccess = `Options -Indexes
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
@@ -29,7 +19,3 @@ const htaccess = `Options -Indexes
   ExpiresByType text/css "access plus 1 month"
   ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
-`;
-
-writeFileSync(join(distDir, '.htaccess'), htaccess, 'utf8');
-console.log(`Hostinger package created at ${distDir}`);
