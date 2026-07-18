@@ -1,6 +1,7 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useLocation, useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { Sparkles, Crown, Gem, ArrowRight, Music, Bot, Mic, Palette, Heart, Camera, ArrowLeft } from "lucide-react";
+import { Sparkles, Crown, Gem, ArrowRight, Music, Bot, Mic, Palette, Heart, Camera, ArrowLeft, Menu } from "lucide-react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import heroImg from "@/assets/hero-tying.jpg";
 import thaliImg from "@/assets/hero-thali.jpg";
 import familyImg from "@/assets/hero-family.jpg";
@@ -11,6 +12,7 @@ import { TemplateEngine } from "@/features/template/TemplateEngine";
 import { findTemplate } from "@/data/templates";
 import { decodeInviteState } from "@/lib/invite-link";
 import type { TemplateState } from "@/features/template/useTemplateState";
+import { SiteFooter } from "@/components/site/SiteFooter";
 
 function App({ tier }: { tier?: Tier }) {
   const navigate = useNavigate();
@@ -48,7 +50,23 @@ function App({ tier }: { tier?: Tier }) {
   return <Landing onNavigate={navigate} />;
 }
 
+const MOBILE_NAV_LINKS = [
+  { to: "/silver", label: "Silver Templates" },
+  { to: "/gold", label: "Gold Templates" },
+  { to: "/platinum", label: "Platinum Templates" },
+  { to: "/about", label: "About Us" },
+  { to: "/contact", label: "Contact Us" },
+  { to: "/faqs", label: "FAQs" },
+];
+
 function Landing({ onNavigate }: { onNavigate: (path: string) => void }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const go = (path: string) => {
+    setMenuOpen(false);
+    onNavigate(path);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[oklch(0.96_0.02_85)] via-[oklch(0.92_0.06_60)] to-[oklch(0.88_0.14_35)] text-[oklch(0.2_0.06_30)]">
       <section className="relative overflow-hidden">
@@ -56,16 +74,43 @@ function Landing({ onNavigate }: { onNavigate: (path: string) => void }) {
           <img src={heroImg} alt="" className="h-full w-full object-cover object-center" />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-transparent to-[oklch(0.92_0.06_60)]/30 pointer-events-none" />
-        <nav className="relative z-10 flex items-center justify-between px-6 py-5 sm:px-10">
-          <div className="font-display text-2xl font-bold text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
+        <nav className="relative z-10 flex items-center justify-between px-4 py-5 sm:px-10">
+          <div className="font-display text-xl sm:text-2xl font-bold text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)]">
             Rakhi Vibes
           </div>
-          <div className="flex gap-2 text-sm">
-            <button onClick={() => onNavigate("/silver")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40">Silver</button>
-            <button onClick={() => onNavigate("/gold")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40">Gold</button>
-            <button onClick={() => onNavigate("/platinum")} className="px-3 py-1.5 rounded-full bg-maroon-gold text-white font-medium shadow-soft">Platinum</button>
+          <div className="flex items-center gap-2 text-sm">
+            <button onClick={() => onNavigate("/silver")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40 transition-colors">Silver</button>
+            <button onClick={() => onNavigate("/gold")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40 transition-colors">Gold</button>
+            <button onClick={() => onNavigate("/contact")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40 transition-colors">Contact</button>
+            <button onClick={() => onNavigate("/platinum")} className="px-3 py-1.5 rounded-full bg-maroon-gold text-white font-medium shadow-soft hover:scale-105 transition-transform">Platinum</button>
+            <button
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open menu"
+              className="inline-flex sm:hidden items-center justify-center rounded-full bg-white/20 p-2 text-white backdrop-blur-sm hover:bg-white/40 transition-colors"
+            >
+              <Menu size={18} />
+            </button>
           </div>
         </nav>
+
+        <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+          <SheetContent side="right" className="w-4/5 bg-[oklch(0.98_0.02_85)]">
+            <SheetHeader>
+              <SheetTitle className="font-display text-xl">Rakhi Vibes</SheetTitle>
+            </SheetHeader>
+            <nav className="mt-4 flex flex-col gap-1">
+              {MOBILE_NAV_LINKS.map((l) => (
+                <button
+                  key={l.to}
+                  onClick={() => go(l.to)}
+                  className="rounded-xl px-3 py-3 text-left text-base font-medium hover:bg-black/5 active:bg-black/10 transition-colors"
+                >
+                  {l.label}
+                </button>
+              ))}
+            </nav>
+          </SheetContent>
+        </Sheet>
         <div className="relative z-10 mx-auto max-w-5xl px-6 py-16 sm:py-28 text-center">
           <div className="inline-flex items-center gap-1.5 rounded-full border border-current/20 bg-white/80 px-3 py-1 text-xs uppercase tracking-widest backdrop-blur-sm">
             <Sparkles size={12} /> Raksha Bandhan 2026 · 60+ Templates
@@ -123,10 +168,7 @@ function Landing({ onNavigate }: { onNavigate: (path: string) => void }) {
         </div>
       </section>
 
-      <footer className="bg-[oklch(0.3_0.1_25)] py-10 text-center text-white">
-        <div className="font-hand text-2xl">— Rakhi Vibes —</div>
-        <p className="mt-2 text-sm opacity-80">Made with ❤️ for every brother and sister · Raksha Bandhan 2026</p>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
@@ -182,6 +224,7 @@ function Catalog({ tier, onNavigate }: { tier: Tier; onNavigate: (path: string) 
           })}
         </div>
       </div>
+      <SiteFooter />
     </div>
   );
 }

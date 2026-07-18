@@ -2,7 +2,13 @@
   "permissions": {
     "allow": [
       "Bash(npx tsx *)",
-      "Bash(powershell -Command \"Stop-Process -Id 7180 -Force\")"
+      "Bash(powershell -Command \"Stop-Process -Id 7180 -Force\")",
+      "Bash(node -e ' *)",
+      "Bash(node \"C:\\\\Users\\\\Admin\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-Admin-Desktop-rakhi-rakhi-invite\\\\ee959a0d-3d5e-4e0d-87df-5eba526a5fd8\\\\scratchpad\\\\verify-pages.js\")",
+      "Bash(lsof -ti:5173 -sTCP:LISTEN)",
+      "Bash(xargs -r kill)",
+      "Bash(lsof -ti:4321 -sTCP:LISTEN)",
+      "Bash(npm uninstall *)"
     ]
   }
 }
