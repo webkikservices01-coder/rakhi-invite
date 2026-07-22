@@ -54,13 +54,15 @@ const socials = [
 ];
 
 // Logo Component
-function Logo() {
+function Logo({ size = "header" }: { size?: "header" | "footer" }) {
   return (
     <Link to="/" className="group inline-flex items-center">
       <img
         src={webkikLogo}
         alt="Webkik Services"
-        className="h-8 w-auto object-contain transition-transform group-hover:scale-105 sm:h-9"
+        className={`w-auto object-contain transition-transform group-hover:scale-105 ${
+          size === "header" ? "h-16 sm:h-20" : "h-9"
+        }`}
       />
     </Link>
   );
@@ -72,9 +74,9 @@ export default function ChooserHome() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[oklch(0.97_0.02_85)] via-[oklch(0.94_0.04_70)] to-[oklch(0.9_0.06_55)]">
       {/* Top Bar / Header with Logo */}
-      <header className="mx-auto flex max-w-5xl items-center justify-between px-6 pt-6">
+      <header className="relative mx-auto flex max-w-5xl items-center justify-center px-6 pt-8">
         <Logo />
-        <div className="inline-flex items-center gap-1.5 rounded-full border border-current/20 bg-white/70 px-3 py-1 text-xs uppercase tracking-widest backdrop-blur-sm">
+        <div className="absolute right-6 top-8 hidden items-center gap-1.5 rounded-full border border-current/20 bg-white/70 px-3 py-1 text-xs uppercase tracking-widest backdrop-blur-sm sm:inline-flex">
           125+ Templates
         </div>
       </header>
@@ -178,7 +180,7 @@ export function PublicFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.8fr_1.3fr]">
           {/* Brand column */}
           <div className="fade-in">
-            <Logo />
+            <Logo size="footer" />
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-[#6a4757]">
               The AI-powered digital card platform — built and operated by{" "}
               <span className="font-semibold text-[#3b0a1e]">{COMPANY.name}</span>.
