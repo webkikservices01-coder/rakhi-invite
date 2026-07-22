@@ -8,7 +8,20 @@
       "Bash(lsof -ti:5173 -sTCP:LISTEN)",
       "Bash(xargs -r kill)",
       "Bash(lsof -ti:4321 -sTCP:LISTEN)",
-      "Bash(npm uninstall *)"
+      "Bash(npm uninstall *)",
+      "Bash(grep -rn '\"/silver\"\\\\|\"/gold\"\\\\|\"/platinum\"\\\\|\"/about\"\\\\|\"/contact\"\\\\|\"/faqs\"\\\\|\"/terms\"\\\\|\"/privacy\"\\\\|\"/refund-policy\"\\\\|\"/cancellation-policy\"\\\\|`/t/\\\\|\"/t/' src --include=\"*.tsx\" --include=\"*.ts\" -l)",
+      "Bash(grep -n '\"/silver\"\\\\|\"/gold\"\\\\|\"/platinum\"\\\\|\"/about\"\\\\|\"/contact\"\\\\|\"/faqs\"\\\\|\"/terms\"\\\\|\"/privacy\"\\\\|\"/refund-policy\"\\\\|\"/cancellation-policy\"\\\\|`/t/\\\\|\"/t/' src/components/site/GlobalChrome.tsx src/components/site/SiteFooter.tsx src/pages/AboutPage.tsx src/pages/CancellationPolicyPage.tsx src/pages/FAQPage.tsx src/pages/PrivacyPage.tsx src/pages/RefundPolicyPage.tsx src/pages/TermsPage.tsx)",
+      "Bash(grep -n \"return_url\\\\|/t/\\\\${\" api/create-order.js)",
+      "Bash(grep -rn 'to=\"/\\\\|href=\"/\\\\|navigate\\(\"/\\\\|onNavigate\\(\"/' src/pages src/components --include=\"*.tsx\")",
+      "Bash(powershell -Command \"Stop-Process -Id 9376 -Force\")",
+      "Bash(grep -rn 'to=\"/\\\\|href=\"/\\\\|navigate\\(\"/\\\\|window.location.origin' 'C:/Users/Admin/Desktop/wedd temp/wedding-tempalte-website/src' --include=*.tsx --include=*.ts)",
+      "Bash(WEDDING=\"C:/Users/Admin/Desktop/wedd temp/wedding-tempalte-website\" *)",
+      "Read(//c/Users/Admin/Desktop/wedd temp/wedding-tempalte-website/src/routes/**)",
+      "Bash(cp 'C:/Users/Admin/Desktop/wedd temp/wedding-tempalte-website/src/routes/*.tsx' c:/Users/Admin/Desktop/rakhi/rakhi-invite/src/verticals/wedding/routes/)",
+      "Bash(cp 'C:/Users/Admin/Desktop/wedd temp/wedding-tempalte-website/src/components/wedding/*.tsx' c:/Users/Admin/Desktop/rakhi/rakhi-invite/src/verticals/wedding/components/wedding/)",
+      "Bash(cp 'C:/Users/Admin/Desktop/wedd temp/wedding-tempalte-website/src/components/wedding/templates/*.tsx' c:/Users/Admin/Desktop/rakhi/rakhi-invite/src/verticals/wedding/components/wedding/templates/)",
+      "Bash(cp 'C:/Users/Admin/Desktop/wedd temp/wedding-tempalte-website/src/components/wedding/vogue/*.tsx' c:/Users/Admin/Desktop/rakhi/rakhi-invite/src/verticals/wedding/components/wedding/vogue/)",
+      "Bash(cp 'C:/Users/Admin/Desktop/wedd temp/wedding-tempalte-website/src/components/site/SiteShell.tsx' c:/Users/Admin/Desktop/rakhi/rakhi-invite/src/verticals/wedding/components/site/)"
     ]
   }
 }

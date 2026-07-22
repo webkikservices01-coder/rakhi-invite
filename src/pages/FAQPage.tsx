@@ -38,8 +38,8 @@ const FAQS: { q: string; a: ReactNode }[] = [
     a: (
       <>
         This is rare, but sorry if it happened! Contact us via the{" "}
-        <Link to="/contact">Contact Us</Link> page or WhatsApp with your payment reference and we'll
-        resolve it — see our <Link to="/refund-policy">Refund Policy</Link> for details.
+        <Link to="/rakhi/contact">Contact Us</Link> page or WhatsApp with your payment reference and we'll
+        resolve it — see our <Link to="/rakhi/refund-policy">Refund Policy</Link> for details.
       </>
     ),
   },
@@ -48,7 +48,7 @@ const FAQS: { q: string; a: ReactNode }[] = [
     a: (
       <>
         Since unlocks are digital and delivered instantly, refunds are limited to failed/duplicate
-        payments — see our full <Link to="/refund-policy">Refund Policy</Link>.
+        payments — see our full <Link to="/rakhi/refund-policy">Refund Policy</Link>.
       </>
     ),
   },
@@ -72,7 +72,7 @@ const FAQS: { q: string; a: ReactNode }[] = [
     q: "Who do I contact for support?",
     a: (
       <>
-        Reach us anytime via our <Link to="/contact">Contact Us</Link> page, email{" "}
+        Reach us anytime via our <Link to="/rakhi/contact">Contact Us</Link> page, email{" "}
         <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>, or call/WhatsApp {COMPANY.phone} ({COMPANY.hours}).
       </>
     ),
@@ -94,7 +94,7 @@ export default function FAQPage() {
       </Accordion>
 
       <p className="mt-8">
-        Didn't find your answer? Visit our <Link to="/contact">Contact Us</Link> page and we'll get back
+        Didn't find your answer? Visit our <Link to="/rakhi/contact">Contact Us</Link> page and we'll get back
         to you.
       </p>
     </InfoPageLayout>

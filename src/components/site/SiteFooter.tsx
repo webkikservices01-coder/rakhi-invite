@@ -4,13 +4,13 @@ import { COMPANY } from "@/data/company";
 import { useReveal } from "@/hooks/use-reveal";
 
 const QUICK_LINKS = [
-  { to: "/about", label: "About Us" },
-  { to: "/contact", label: "Contact Us" },
-  { to: "/faqs", label: "FAQs" },
-  { to: "/privacy", label: "Privacy Policy" },
-  { to: "/terms", label: "Terms & Conditions" },
-  { to: "/refund-policy", label: "Refund Policy" },
-  { to: "/cancellation-policy", label: "Cancellation Policy" },
+  { to: "/rakhi/about", label: "About Us" },
+  { to: "/rakhi/contact", label: "Contact Us" },
+  { to: "/rakhi/faqs", label: "FAQs" },
+  { to: "/rakhi/privacy", label: "Privacy Policy" },
+  { to: "/rakhi/terms", label: "Terms & Conditions" },
+  { to: "/rakhi/refund-policy", label: "Refund Policy" },
+  { to: "/rakhi/cancellation-policy", label: "Cancellation Policy" },
 ];
 
 export function SiteFooter() {

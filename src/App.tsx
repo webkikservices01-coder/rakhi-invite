@@ -20,7 +20,7 @@ function App({ tier }: { tier?: Tier }) {
   const params = useParams();
   const [searchParams] = useSearchParams();
 
-  const isViewerRoute = location.pathname.startsWith("/t/");
+  const isViewerRoute = location.pathname.startsWith("/rakhi/t/");
 
   const templateData = useMemo(() => {
     if (!isViewerRoute) return null;
@@ -51,12 +51,12 @@ function App({ tier }: { tier?: Tier }) {
 }
 
 const MOBILE_NAV_LINKS = [
-  { to: "/silver", label: "Silver Templates" },
-  { to: "/gold", label: "Gold Templates" },
-  { to: "/platinum", label: "Platinum Templates" },
-  { to: "/about", label: "About Us" },
-  { to: "/contact", label: "Contact Us" },
-  { to: "/faqs", label: "FAQs" },
+  { to: "/rakhi/silver", label: "Silver Templates" },
+  { to: "/rakhi/gold", label: "Gold Templates" },
+  { to: "/rakhi/platinum", label: "Platinum Templates" },
+  { to: "/rakhi/about", label: "About Us" },
+  { to: "/rakhi/contact", label: "Contact Us" },
+  { to: "/rakhi/faqs", label: "FAQs" },
 ];
 
 function Landing({ onNavigate }: { onNavigate: (path: string) => void }) {
@@ -79,10 +79,10 @@ function Landing({ onNavigate }: { onNavigate: (path: string) => void }) {
             Rakhi Vibes
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <button onClick={() => onNavigate("/silver")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40 transition-colors">Silver</button>
-            <button onClick={() => onNavigate("/gold")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40 transition-colors">Gold</button>
-            <button onClick={() => onNavigate("/contact")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40 transition-colors">Contact</button>
-            <button onClick={() => onNavigate("/platinum")} className="px-3 py-1.5 rounded-full bg-maroon-gold text-white font-medium shadow-soft hover:scale-105 transition-transform">Platinum</button>
+            <button onClick={() => onNavigate("/rakhi/silver")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40 transition-colors">Silver</button>
+            <button onClick={() => onNavigate("/rakhi/gold")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40 transition-colors">Gold</button>
+            <button onClick={() => onNavigate("/rakhi/contact")} className="hidden sm:inline-block px-3 py-1.5 rounded-full hover:bg-white/40 transition-colors">Contact</button>
+            <button onClick={() => onNavigate("/rakhi/platinum")} className="px-3 py-1.5 rounded-full bg-maroon-gold text-white font-medium shadow-soft hover:scale-105 transition-transform">Platinum</button>
             <button
               onClick={() => setMenuOpen(true)}
               aria-label="Open menu"
@@ -122,10 +122,10 @@ function Landing({ onNavigate }: { onNavigate: (path: string) => void }) {
             Premium Rakhi templates with real Indian family photography, glitter drops, a music player, and an AI chatbot that redesigns your card as you speak.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <button onClick={() => onNavigate("/platinum")} className="inline-flex items-center gap-2 rounded-full bg-royal-grad px-6 py-3.5 text-white font-medium shadow-platinum hover:scale-105 transition">
+            <button onClick={() => onNavigate("/rakhi/platinum")} className="inline-flex items-center gap-2 rounded-full bg-royal-grad px-6 py-3.5 text-white font-medium shadow-platinum hover:scale-105 transition">
               Try Platinum <ArrowRight size={16} />
             </button>
-            <button onClick={() => onNavigate("/silver")} className="inline-flex items-center gap-2 rounded-full border border-current/30 bg-white/80 px-6 py-3.5 font-medium hover:bg-white transition">
+            <button onClick={() => onNavigate("/rakhi/silver")} className="inline-flex items-center gap-2 rounded-full border border-current/30 bg-white/80 px-6 py-3.5 font-medium hover:bg-white transition">
               Start with Silver
             </button>
           </div>
@@ -138,9 +138,9 @@ function Landing({ onNavigate }: { onNavigate: (path: string) => void }) {
           <h2 className="mt-2 font-display text-4xl sm:text-5xl font-bold">Three Tiers · One Heartfelt Message</h2>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
-          <TierCard onNavigate={onNavigate} to="/silver" tier="Silver" count="10" icon={<Sparkles className="text-slate-500" />} title="Reshmi Bandhan" bullets={["1 page card", "Editable name & message", "Subtle petals / diyas / sparkles", "8 clean palettes"]} gradient="bg-gradient-to-br from-slate-50 to-slate-200 text-slate-900" img={thaliImg} />
-          <TierCard onNavigate={onNavigate} to="/gold" tier="Gold" count="18" icon={<Crown className="text-amber-600" />} title="Sunehri Rishta" bullets={["2-3 pages · Rich layouts", "🎵 Music player + upload", "📸 Photo upload (brother + sister)", "Real monuments · Taj, Qutub, Eiffel, Burj"]} gradient="bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-100 text-slate-900" img={familyImg} featured />
-          <TierCard onNavigate={onNavigate} to="/platinum" tier="Platinum" count="32" icon={<Gem className="text-fuchsia-500" />} title="Rajwada Signature" bullets={["3-5 pages · Cinematic", "🤖 AI Chatbot + 🎤 Voice control", "♾️ Unlimited photos", "Everything from Gold + luxe glow"]} gradient="bg-gradient-to-br from-fuchsia-100 via-rose-100 to-amber-100 text-slate-900" img={decorImg} />
+          <TierCard onNavigate={onNavigate} to="/rakhi/silver" tier="Silver" count="10" icon={<Sparkles className="text-slate-500" />} title="Reshmi Bandhan" bullets={["1 page card", "Editable name & message", "Subtle petals / diyas / sparkles", "8 clean palettes"]} gradient="bg-gradient-to-br from-slate-50 to-slate-200 text-slate-900" img={thaliImg} />
+          <TierCard onNavigate={onNavigate} to="/rakhi/gold" tier="Gold" count="18" icon={<Crown className="text-amber-600" />} title="Sunehri Rishta" bullets={["2-3 pages · Rich layouts", "🎵 Music player + upload", "📸 Photo upload (brother + sister)", "Real monuments · Taj, Qutub, Eiffel, Burj"]} gradient="bg-gradient-to-br from-amber-50 via-yellow-50 to-amber-100 text-slate-900" img={familyImg} featured />
+          <TierCard onNavigate={onNavigate} to="/rakhi/platinum" tier="Platinum" count="32" icon={<Gem className="text-fuchsia-500" />} title="Rajwada Signature" bullets={["3-5 pages · Cinematic", "🤖 AI Chatbot + 🎤 Voice control", "♾️ Unlimited photos", "Everything from Gold + luxe glow"]} gradient="bg-gradient-to-br from-fuchsia-100 via-rose-100 to-amber-100 text-slate-900" img={decorImg} />
         </div>
       </section>
 
@@ -184,7 +184,7 @@ function Catalog({ tier, onNavigate }: { tier: Tier; onNavigate: (path: string) 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[oklch(0.98_0.02_85)] to-[oklch(0.9_0.08_50)]">
       <div className={`${meta.hero} px-6 py-14 sm:py-20 relative overflow-hidden`}>
-        <button onClick={() => onNavigate("/")} className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest opacity-90 hover:opacity-100">
+        <button onClick={() => onNavigate("/rakhi")} className="inline-flex items-center gap-1.5 text-xs uppercase tracking-widest opacity-90 hover:opacity-100">
           <ArrowLeft size={14} /> Home
         </button>
         <div className="mt-4 max-w-4xl">
@@ -197,14 +197,11 @@ function Catalog({ tier, onNavigate }: { tier: Tier; onNavigate: (path: string) 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {templates.map((t, idx) => {
             const hash = [...t.id].reduce((a, c) => a + c.charCodeAt(0), 0) + idx * 37;
-            const hue = (hash * 47) % 360;
-            const sat = 110 + (hash % 60);
-            const rot = ((hash % 7) - 3);
             return (
-              <button key={t.id} onClick={() => onNavigate(`/t/${t.tier}/${t.id}`)} className="group overflow-hidden rounded-3xl bg-white shadow-soft transition-all hover:-translate-y-1 hover:shadow-2xl animate-fade-up text-left" style={{ animationDelay: `${idx * 30}ms` }}>
+              <button key={t.id} onClick={() => onNavigate(`/rakhi/t/${t.tier}/${t.id}`)} className="group overflow-hidden rounded-3xl bg-white shadow-soft transition-all hover:-translate-y-1 hover:shadow-2xl animate-fade-up text-left" style={{ animationDelay: `${idx * 30}ms` }}>
                 <div className="relative aspect-[4/5] overflow-hidden" style={{ background: t.palette.bg }}>
-                  <img src={IMAGES[t.heroImage]} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-110" style={{ filter: `hue-rotate(${hue}deg) saturate(${sat}%)`, transform: `rotate(${rot}deg) scale(1.08)` }} />
-                  <div className="absolute inset-0 opacity-40 mix-blend-soft-light" style={{ background: `radial-gradient(circle at ${(hash % 80) + 10}% ${(hash * 3 % 80) + 10}%, ${t.palette.accent}, transparent 65%)` }} />
+                  <img src={IMAGES[t.heroImage]} alt="" className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-110" />
+                  <div className="absolute inset-0 opacity-25 mix-blend-soft-light" style={{ background: `radial-gradient(circle at ${(hash % 80) + 10}% ${(hash * 3 % 80) + 10}%, ${t.palette.accent}, transparent 65%)` }} />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
                   <div className="absolute inset-x-0 top-0 flex items-center justify-between p-4">
                     <span className="rounded-full bg-black/30 px-2 py-0.5 text-[10px] font-bold tracking-widest text-white backdrop-blur">#{t.id.toUpperCase()}</span>

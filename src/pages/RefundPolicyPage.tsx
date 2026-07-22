@@ -43,7 +43,7 @@ export default function RefundPolicyPage() {
         Email <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> or message us on WhatsApp at{" "}
         {COMPANY.whatsapp} within <strong>7 days</strong> of the transaction, with your registered
         phone/email used at checkout and, if available, the order ID or payment reference shown on your
-        Cashfree receipt. You can also use our <Link to="/contact">Contact Us</Link> form.
+        Cashfree receipt. You can also use our <Link to="/rakhi/contact">Contact Us</Link> form.
       </p>
 
       <h2>4. Processing Time</h2>
@@ -55,7 +55,7 @@ export default function RefundPolicyPage() {
 
       <h2>5. Related Policy</h2>
       <p>
-        Please also see our <Link to="/cancellation-policy">Cancellation Policy</Link> for details on
+        Please also see our <Link to="/rakhi/cancellation-policy">Cancellation Policy</Link> for details on
         cancelling an order before payment completes.
       </p>
     </InfoPageLayout>

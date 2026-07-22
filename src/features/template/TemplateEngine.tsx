@@ -55,7 +55,7 @@ export function TemplateEngine({
         aiLang: state.aiLang,
         paletteOverride: state.paletteOverride,
       });
-      const url = `${window.location.origin}/t/${template.tier}/${template.id}?d=${encoded}`;
+      const url = `${window.location.origin}/rakhi/t/${template.tier}/${template.id}?d=${encoded}`;
       await navigator.clipboard.writeText(url).catch(() => {});
       toast.success(`Invite ready! Share this link: ${url}`);
     } catch (err) {

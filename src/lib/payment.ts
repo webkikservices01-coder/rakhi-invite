@@ -10,7 +10,7 @@ export async function createOrder(input: {
   const res = await fetch(`${API_BASE}/api/create-order`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(input),
+    body: JSON.stringify({ ...input, vertical: "rakhi" }),
   });
   const data = await res.json();
   if (!res.ok) throw new Error(data.message || "Couldn't create the order.");

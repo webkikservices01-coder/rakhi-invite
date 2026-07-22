@@ -18,7 +18,7 @@ export default function CancellationPolicyPage() {
         Since Gold and Platinum unlocks are digital products delivered instantly upon successful payment,
         <strong> orders cannot be cancelled once payment is completed and the unlock is delivered.</strong>{" "}
         If your payment was deducted but the unlock did not reflect in your browser, this is treated as a
-        failed delivery, not a cancellation — see our <Link to="/refund-policy">Refund Policy</Link> for
+        failed delivery, not a cancellation — see our <Link to="/rakhi/refund-policy">Refund Policy</Link> for
         how to get this resolved.
       </p>
 
@@ -32,7 +32,7 @@ export default function CancellationPolicyPage() {
       <p>
         If a payment is stuck, pending, or you're unsure of its status, contact us immediately at{" "}
         <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> or {COMPANY.phone} (WhatsApp available)
-        and we'll help you sort it out. You can also use our <Link to="/contact">Contact Us</Link> form.
+        and we'll help you sort it out. You can also use our <Link to="/rakhi/contact">Contact Us</Link> form.
       </p>
     </InfoPageLayout>
   );

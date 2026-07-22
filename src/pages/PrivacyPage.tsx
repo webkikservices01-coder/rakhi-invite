@@ -27,7 +27,7 @@ export default function PrivacyPage() {
         </li>
         <li>
           <strong>Contact form details:</strong> name, email, phone, subject, and message, if you reach
-          out via our <Link to="/contact">Contact Us</Link> page.
+          out via our <Link to="/rakhi/contact">Contact Us</Link> page.
         </li>
       </ul>
       <h3>b) Information collected automatically</h3>
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
       <p>
         For privacy-related questions, contact us at{" "}
         <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a> or {COMPANY.phone}, or visit our{" "}
-        <Link to="/contact">Contact Us</Link> page.
+        <Link to="/rakhi/contact">Contact Us</Link> page.
       </p>
     </InfoPageLayout>
   );

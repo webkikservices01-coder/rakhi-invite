@@ -2,6 +2,7 @@ import { CF_BASE_URL, cfHeaders } from "./_lib/cashfree.js";
 import { isRefrensConfigured, createRefrensInvoice } from "./_lib/refrens.js";
 import { applyCors } from "./_lib/cors.js";
 
+// Only Rakhi issues Refrens invoices today — Wedding never had this feature.
 const TIER_LABEL = { gold: "Rakhi Vibes — Gold Tier Unlock", platinum: "Rakhi Vibes — Platinum Tier Unlock" };
 
 export default async function handler(req, res) {
@@ -20,12 +21,13 @@ export default async function handler(req, res) {
       return res.status(200).json({ status: data.order_status });
     }
 
+    const vertical = data.order_tags?.vertical;
     const tier = data.order_tags?.tier;
     const templateId = data.order_tags?.templateId;
     let invoicePdfUrl = "";
 
     // Best-effort — invoice failure never blocks the unlock itself.
-    if (isRefrensConfigured()) {
+    if (vertical === "rakhi" && isRefrensConfigured()) {
       try {
         const invoice = await createRefrensInvoice({
           name: data.customer_details?.customer_name,

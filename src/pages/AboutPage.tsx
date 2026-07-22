@@ -40,7 +40,7 @@ export default function AboutPage() {
       <h2>Get in Touch</h2>
       <p>
         Have a question, feedback, or a business enquiry? Visit our{" "}
-        <Link to="/contact">Contact Us</Link> page — we'd love to hear from you.
+        <Link to="/rakhi/contact">Contact Us</Link> page — we'd love to hear from you.
       </p>
     </InfoPageLayout>
   );

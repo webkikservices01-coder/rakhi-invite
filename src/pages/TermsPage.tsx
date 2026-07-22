@@ -39,8 +39,8 @@ export default function TermsPage() {
       <p>
         Gold and Platinum unlocks are digital goods delivered instantly to your browser upon successful
         payment verification — there is no physical shipment. Because delivery is instant and
-        irreversible, please review our <Link to="/refund-policy">Refund Policy</Link> and{" "}
-        <Link to="/cancellation-policy">Cancellation Policy</Link> before purchasing.
+        irreversible, please review our <Link to="/rakhi/refund-policy">Refund Policy</Link> and{" "}
+        <Link to="/rakhi/cancellation-policy">Cancellation Policy</Link> before purchasing.
       </p>
 
       <h2>4. User Content</h2>
@@ -102,7 +102,7 @@ export default function TermsPage() {
       <h2>11. Contact Us</h2>
       <p>
         For any questions about these Terms, please reach out via our{" "}
-        <Link to="/contact">Contact Us</Link> page, email us at{" "}
+        <Link to="/rakhi/contact">Contact Us</Link> page, email us at{" "}
         <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>, or call {COMPANY.phone}.
       </p>
     </InfoPageLayout>
